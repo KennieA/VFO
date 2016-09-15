@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{CD8C9303-404B-FB8D-6B9B-21988D5CAC0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_3_5;UNITY_5_3;UNITY_5;ENABLE_NEW_BUGREPORTER;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_SPRITE_POLYGON;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;INCLUDE_DIRECTX12;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_LOCALIZATION;ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION;ENABLE_EDITOR_TESTS_RUNNER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_LOG_MIXED_STACKTRACE;ENABLE_UNITYWEBREQUEST;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateAntiSlideMat.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBed.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBed2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBed3.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBedSheet.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBorger.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateBox.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateChair1.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateChair2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateDrawSheet.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateDrawSheet2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateFemale.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateFemaleHelper.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateFloorLift.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateLiftReceiver.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateMale.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateMaleHelper.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimatePatient.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimatePillow.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateRoofLift.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateSlideMat.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateSlideMat2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateSlideMat21.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateSling.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateSling2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWalker.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWalker2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWheelChair.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWheelChair2.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWheelChair3.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWheelChairSlideMat_1.cs" />
+     <Compile Include="Assets\Scripts\AnimatedItems\AnimateWheelChairSlideMat_2.cs" />
+     <Compile Include="Assets\Scripts\BackgroundBehaviour.cs" />
+     <Compile Include="Assets\Scripts\BackgroundScript.cs" />
+     <Compile Include="Assets\Scripts\BaseClasses\BaseWindow.cs" />
+     <Compile Include="Assets\Scripts\BaseClasses\Window.cs" />
+     <Compile Include="Assets\Scripts\BaseClasses\Window2.cs" />
+     <Compile Include="Assets\Scripts\BottomBarScript.cs" />
+     <Compile Include="Assets\Scripts\DataRetrieval\JsonCommunication.cs" />
+     <Compile Include="Assets\Scripts\Examples\Example_HUD_Helper.cs" />
+     <Compile Include="Assets\Scripts\Global.cs" />
+     <Compile Include="Assets\Scripts\GridScript.cs" />
+     <Compile Include="Assets\Scripts\HUD.cs" />
+     <Compile Include="Assets\Scripts\HUDBed.cs" />
+     <Compile Include="Assets\Scripts\HUDTiled.cs" />
+     <Compile Include="Assets\Scripts\HUDWalker.cs" />
+     <Compile Include="Assets\Scripts\HelpBox.cs" />
+     <Compile Include="Assets\Scripts\HelpOrTest.cs" />
+     <Compile Include="Assets\Scripts\IdUpdater.cs" />
+     <Compile Include="Assets\Scripts\InfoWindowScript.cs" />
+     <Compile Include="Assets\Scripts\LinkMenu.cs" />
+     <Compile Include="Assets\Scripts\LinkMenu1.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\MainMenuScript.cs" />
+     <Compile Include="Assets\Scripts\Message.cs" />
+     <Compile Include="Assets\Scripts\MouseOver\ActionOnClick.cs" />
+     <Compile Include="Assets\Scripts\MouseOver\MouseOverObject.cs" />
+     <Compile Include="Assets\Scripts\NewLinkMenu.cs" />
+     <Compile Include="Assets\Scripts\Preasurepoints\AnimateAndHighlight.cs" />
+     <Compile Include="Assets\Scripts\Preasurepoints\MainLearning.cs" />
+     <Compile Include="Assets\Scripts\Preasurepoints\MainTest.cs" />
+     <Compile Include="Assets\Scripts\Preasurepoints\MouseClick.cs" />
+     <Compile Include="Assets\Scripts\Preasurepoints\RotateDummy.cs" />
+     <Compile Include="Assets\Scripts\SceneLoader.cs" />
+     <Compile Include="Assets\Scripts\ScrollableMenu.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Back_in_chair_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Back_in_chair_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Back_in_chair_borger_b_new.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Back_in_chair_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\ELearning.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Help.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Higher_in_bed_with_drawsheet.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Higher_up_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Higher_up_borger_a_almbed.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Higher_up_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Higher_up_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_Higher_in_bed_pillow.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_Higher_in_bed_slidemat.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_Sit_up_on_bed.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_Sitting_to_lying.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_Turn_to_side.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Horsens_sitting_to_standing.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Introduction.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lie_down_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lie_down_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lie_down_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lifting_from_bed_to_chair_floorlift.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lifting_from_bed_to_chair_rooflift.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lifting_from_bed_to_chair_rooflift_single.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Lifting_from_chair_to_bed_floorlift.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Place_drawsheet_in_bed.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Place_sling_in_bed.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Place_sling_in_bed_single.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Place_sling_in_chair.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Remove_sling_in_bed.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Remove_sling_in_chair.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Remove_sling_in_chair_single.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Results.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Sit_up_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Sit_up_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Sit_up_borger_b_from_side.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Sit_up_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Stand_up_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Stand_up_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Stand_up_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\StarFade.cs" />
+     <Compile Include="Assets\Scripts\Simulation\States.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Talk.cs" />
+     <Compile Include="Assets\Scripts\Simulation\To_side_in_bed_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\To_side_in_bed_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\To_side_in_bed_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Transparency.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Transparency2.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Turn_to_side_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Turn_to_side_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Turn_to_side_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Video.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Walking_borger_a.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Walking_borger_b.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Walking_borger_c.cs" />
+     <Compile Include="Assets\Scripts\Simulation\Welcome.cs" />
+     <Compile Include="Assets\Scripts\SkinTest.cs" />
+     <Compile Include="Assets\Scripts\StaticToolBox.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\DataLoader.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\DataManager.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\ExerciseCollections.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\FirstTimeLoader.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\LoginForm.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\MoveAndFadeCamera.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\ResolutionCheck.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\SkinnedColliderHelper.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\WebplayerFirstLoad.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\XMLNode.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\XMLNodeList.cs" />
+     <Compile Include="Assets\Scripts\SupportScripts\XMLParser.cs" />
+     <Compile Include="Assets\Scripts\Test.cs" />
+     <Compile Include="Assets\Scripts\TestJson.cs" />
+     <Compile Include="Assets\Scripts\Text.cs" />
+     <Compile Include="Assets\Scripts\TobBarScript.cs" />
+     <Compile Include="Assets\Scripts\ToolBox.cs" />
+     <Compile Include="Assets\Scripts\ToolButton.cs" />
+     <Compile Include="Assets\Scripts\ToolGrid.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\AntiSlideMat.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\AntiSlideMat2.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\BedSheet.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\Box.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\Helper.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\Remote.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\SlideMat.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\SlideMat2.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\SlideMatWheelChair.cs" />
+     <Compile Include="Assets\Scripts\ToolModels\Walker.cs" />
+     <Compile Include="Assets\Scripts\Tools\RemoteController.cs" />
+     <Compile Include="Assets\Scripts\Util.cs" />
+     <Compile Include="Assets\Scripts\WindowHandler.cs" />
+     <None Include="Assets\Standard Assets\Projectors\Guidelines.txt" />
+     <None Include="Assets\Resources\language_us.xml" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Multiply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ShowAlphaChannel.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowConeTap.shader" />
+     <None Include="Assets\Shader\Lightmap-BumpSpec.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SunShaftsComposite.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurves.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\NFAA.shader" />
+     <None Include="Assets\Shader\AlphaSelfIllum.shader" />
+     <None Include="Assets\Scenes\lightmap scenes\scene05_seng_lys_setup\BeastSettings_bed.xml" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\VignetteShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\MotionBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowCompose.shader" />
+     <None Include="Assets\Resources\language_se.xml" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\MinMaxReduction.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\SSAA.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\RadialBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ContrastComposite.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset3.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\FisheyeShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Apply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\frag_ao.cginc" />
+     <None Include="Assets\Shader\Lightmap-Glossy.shader" />
+     <None Include="Assets\Shader\transparent_illuminated_2.shader" />
+     <None Include="Assets\Shader\transparent_illuminated_offset_4.shader" />
+     <None Include="Assets\Shader\Lightmap-Bumped.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\DepthOfField34.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\TiltShift.shader" />
+     <None Include="Assets\Shader\transparent_illuminated_offset_3.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SSAOShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ConvertDepth.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionCurvesSimple.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderYUV.shader" />
+     <None Include="Assets\Standard Assets\Projectors\Sources\Shaders\Projector Light.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlowEffectDownsample.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\CreaseApply.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ChromaticAberrationShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GlobalFog.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Luminance.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionSelective.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\Bokeh34.shader" />
+     <None Include="Assets\Shader\transparent_illuminated_1.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
+     <None Include="Assets\Shader\Lightmap-VertexLit.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\DLAA.shader" />
+     <None Include="Assets\Resources\language_dk.xml" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\ColorCorrectionEffect.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\GrayscaleEffect.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SepiaToneEffect.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\TwirlEffect.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VortexEffect.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\Contrast Stretch\Adaptation.shader" />
+     <None Include="Assets\Shader\Tinted Alpha Blend.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\VignettingShader.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA2.shader" />
+     <None Include="Assets\Shader\Lightmap-Diffuse.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectNormals.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\PrepareSunShaftsBlur.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\Blend.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\SimpleClear.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
+     <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
+ <Reference Include="Assembly-UnityScript-firstpass">
+ <HintPath>C:/Users/Martin/Documents/Visual Studio 2013/Projects/WD.VFO.Training/Main/Unity/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="JsonFx.Json">
+ <HintPath>C:/Users/Martin/Documents/Visual Studio 2013/Projects/WD.VFO.Training/Main/Unity/Assets/JsonFx.Json.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{2662B409-6332-1E56-D797-C9025C53BDD6}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
