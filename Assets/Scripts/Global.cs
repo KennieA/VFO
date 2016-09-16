@@ -9,6 +9,7 @@ public class Global : MonoBehaviour {
 
     public ToolButton[] toolButtonArray = new ToolButton[0];
     public ExerciseCategoryCollection categoryCollection = new ExerciseCategoryCollection();
+    public List<QRVideo> qrVideos = new List<QRVideo>();
 
     private static Global _instance; //singleton
     private Dictionary<string,GameObject> guiObjects; //list of the
@@ -144,7 +145,8 @@ public class Global : MonoBehaviour {
                 exercise.Score = score;
                 exercise.Attempted = true;
                 category.Update();
-                StartCoroutine(DataManager.UploadData());
+                //StartCoroutine(DataManager.UploadData());
+                StartCoroutine(DataManager.UploadQRVideo());
             }
         }
         else
