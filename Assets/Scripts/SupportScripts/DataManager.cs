@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using JsonFx.Json;
 using ExerciseCollections;
 using System;
+using System.Net.NetworkInformation;
 
 public class DataManager : MonoBehaviour
 {
@@ -87,8 +88,51 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public class JsonQRVideoCollection
+    {
+        public JsonQRVideo[] QRVideos;
+        public override string ToString()
+        {
+            string result = "";
+            foreach (JsonQRVideo qrv in QRVideos)
+            {
+                result += qrv.ToString() + " ";
+            }
+            result += ">";
+            return result;
+        }
+    }
+
+    public class JsonQRVideoUserView
+    {
+        public int VideoId;
+        public int UserId;
+        public DateTime ViewDate;
+
+        public JsonQRVideoUserView()
+        {
+            
+        }
+
+        public JsonQRVideoUserView(int videoId, int userId, DateTime viewDate)
+        {
+            VideoId = videoId;
+            UserId = userId;
+            ViewDate = viewDate;
+        }
+
+        public override string ToString()
+        {
+            string result = base.ToString() + " " + "{ ";
+
+            result += "}";
+            return result;
+        }
+    }
+
     public class JsonQRVideo
     {
+        public int Id;
         public string Name;
         public string Description;
         public string Url;
@@ -101,6 +145,17 @@ public class DataManager : MonoBehaviour
         {
         }
 
+        public JsonQRVideo(int id, string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+            Url = url;
+            Count = count;
+            UserGroupId = userGroupId;
+            UserId = userId;
+            ReleaseDate = releaseDate;
+        }
 
         public JsonQRVideo(string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
         {
@@ -111,7 +166,6 @@ public class DataManager : MonoBehaviour
             UserGroupId = userGroupId;
             UserId = userId;
             ReleaseDate = releaseDate;
-
         }
 
         public override string ToString()
@@ -301,49 +355,6 @@ public class DataManager : MonoBehaviour
         }   
     }
 
-    static JsonQRVideo QrVideosToJsonQrVideo(QRVideo vid)
-    {
-        JsonQRVideo jsonQrVideo = new JsonQRVideo(vid.Name, vid.Description, vid.Url, vid.Count, vid.UserGroupId, vid.UserId, vid.ReleaseDate);
-        return jsonQrVideo;
-    }
-
-    public static IEnumerator UploadQRVideo()
-    {
-        Debug.Log("UploadQrVideo");
-        string url = "https://vfo.welfaredenmark.com/Service/SaveData/"; //Production environment service
-        url = "http://localhost:59477/Service/SaveVideo/"; //LOCAL SERVICE - Comment for release version
-
-        if (Global.Instance.ProgramLanguage == "sv-SE")
-        {
-            //url = "http://vfo.welfaresverige.se/Service/SaveData/"; //OutComment if release version
-        }
-
-
-        QRVideo vid = new QRVideo("name", "desc", "url", 4, 103, 23, DateTime.Now);
-        JsonQRVideo qrVideos = QrVideosToJsonQrVideo(vid);
-
-        Debug.Log("Converted To Json Container:\n" + qrVideos.ToString());
-        string serialized = JsonWriter.Serialize(qrVideos);
-
-        Debug.Log("Serialized:\n" + serialized);
-        Encoding encoding = Encoding.UTF8;
-        byte[] bytes = encoding.GetBytes(serialized);
-
-        WWW www = new WWW(url, bytes);
-
-        yield return www;
-        // check for errors
-        if (www.error == null)
-        {
-            Debug.Log("Result: " + www.text);
-            Debug.Log("Upload Complete.");
-        }
-        else
-        {
-            Debug.Log("Upload Error: " + www.error);
-        }
-    }
-
     public static IEnumerator UploadData()
     {
         string url = "https://vfo.welfaredenmark.com/Service/SaveData/"; //Production environment service
@@ -353,8 +364,6 @@ public class DataManager : MonoBehaviour
         {
             //url = "http://vfo.welfaresverige.se/Service/SaveData/"; //OutComment if release version
         }
-			
-
 
         Debug.Log("Uploading Data:\n" + Global.Instance.categoryCollection);
         JsonCategoryCollection cc = ExerciseCategoryCollectionToJsonCategoryCollection(Global.Instance.categoryCollection);
@@ -379,6 +388,154 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("Upload Error: " + www.error);
         } 
+    }
+
+    public static IEnumerator RetrieveQRVideoData()
+    {
+        Debug.Log("Retrieving QRVideoData");
+
+        string url = "https://vfo.welfaredenmark.com/Service/GetQRVideos/" + Global.Instance.UserId + "/" + "da-DK"; //Production environment service
+        url = "http://localhost:59477/Service/GetQRVideos/" + Global.Instance.UserId; //LOCAL SERVICE - Comment for release version
+
+        if (Global.Instance.ProgramLanguage == "sv-SE")
+        {
+            //url = "http://vfo.welfaresverige.se/Service/GetQRVideos/" + Global.Instance.UserId + "/" + "sv-SE"; //OutComment if release version
+        }
+
+        WWW www = new WWW(url);
+
+        yield return www;
+
+        if (www.error == null)
+        {
+            Debug.Log("Result:\n" + www.text);
+            try
+            {
+                JsonQRVideoCollection qrvC = JsonReader.Deserialize<JsonQRVideoCollection>(www.text);
+                Global.Instance.qrVideos = JsonQRVideoToQRVideo(qrvC);
+            }
+            catch (Exception e)
+            {
+                Util.MessageBox(new Rect(0, 0, 400, 200), "Error: " + e.Message + "\n\nPlease try to restart the application!", Message.Type.Error, false, true);
+            }
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+    }
+
+    public static IEnumerator UploadQRVideo()
+    {
+        Debug.Log("UploadQrVideo");
+        string url = "https://vfo.welfaredenmark.com/Service/SaveData/"; //Production environment service
+        url = "http://localhost:59477/Service/SaveVideo/"; //LOCAL SERVICE - Comment for release version
+
+
+
+        if (Global.Instance.ProgramLanguage == "sv-SE")
+        {
+            //url = "http://vfo.welfaresverige.se/Service/SaveData/"; //OutComment if release version
+        }
+
+
+        QRVideo vid = new QRVideo("name", "desc", "url", 4, 103, 23, DateTime.Now);
+        JsonQRVideo qrVideos = QRVideoToJsonQRVideo(vid);
+
+        Debug.Log("Converted To Json Container:\n" + qrVideos.ToString());
+        string serialized = JsonWriter.Serialize(qrVideos);
+
+        Debug.Log("Serialized:\n" + serialized);
+        Encoding encoding = Encoding.UTF8;
+        byte[] bytes = encoding.GetBytes(serialized);
+
+        WWW www = new WWW(url, bytes);
+
+        yield return www;
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log("Result: " + www.text);
+            Debug.Log("Upload Complete.");
+        }
+        else
+        {
+            Debug.Log("Upload Error: " + www.error);
+        }
+    }
+
+    public static IEnumerator UpdateQRVideo(QRVideo qrVideo)
+    {
+        Debug.Log("UpdateQRVideo");
+        string url = "https://vfo.welfaredenmark.com/Service/UpdateData/"; //Production environment service
+        url = "http://localhost:59477/Service/UpdateVideo/"; //LOCAL SERVICE - Comment for release version
+
+        if (Global.Instance.ProgramLanguage == "sv-SE")
+        {
+            //url = "http://vfo.welfaresverige.se/Service/UpdateVideo/"; //OutComment if release version
+        }
+
+        JsonQRVideo jsonVid = QRVideoToJsonQRVideo(qrVideo);
+
+        Debug.Log("Converted To Json Container:\n" + jsonVid.ToString());
+        string serialized = JsonWriter.Serialize(jsonVid);
+
+        Debug.Log("Serialized:\n" + serialized);
+        Encoding encoding = Encoding.UTF8;
+        byte[] bytes = encoding.GetBytes(serialized);
+
+        var headers = new Dictionary<string, string>();
+        headers.Add("X-HTTP-Method-Override", "PUT");
+
+        WWW www = new WWW(url, bytes, headers);
+
+        yield return www;
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log("Result: " + www.text);
+            Debug.Log("Update Complete.");
+        }
+        else
+        {
+            Debug.Log("Update Error: " + www.error);
+        }
+    }
+
+    public static IEnumerator UploadQRVideoUserView()
+    {
+        Debug.Log("UploadQrVideo");
+        string url = "https://vfo.welfaredenmark.com/Service/SaveVideoUserViewData/"; //Production environment service
+        url = "http://localhost:59477/Service/SaveVideoUserViewData/"; //LOCAL SERVICE - Comment for release version
+
+        if (Global.Instance.ProgramLanguage == "sv-SE")
+        {
+            //url = "http://vfo.welfaresverige.se/Service/SaveVideoUserViewData/"; //OutComment if release version
+        }
+
+        QRVideoUserView view = new QRVideoUserView(1, 1, DateTime.Now);
+        JsonQRVideoUserView qrVideoUserView = QRVideoUserViewToJsonQRVideoUserView(view);
+
+        Debug.Log("Converted To Json Container:\n" + qrVideoUserView.ToString());
+        string serialized = JsonWriter.Serialize(qrVideoUserView);
+
+        Debug.Log("Serialized:\n" + serialized);
+        Encoding encoding = Encoding.UTF8;
+        byte[] bytes = encoding.GetBytes(serialized);
+
+        WWW www = new WWW(url, bytes);
+
+        yield return www;
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log("Result: " + www.text);
+            Debug.Log("Upload Complete.");
+        }
+        else
+        {
+            Debug.Log("Upload Error: " + www.error);
+        }
     }
 
     static public IEnumerator WaitForRequest(WWW www)
@@ -448,8 +605,31 @@ public class DataManager : MonoBehaviour
         return jcc;
     }
 
+    static List<QRVideo> JsonQRVideoToQRVideo(JsonQRVideoCollection qrvCol)
+    {
+        List<QRVideo> qrvList = new List<QRVideo>();
+        foreach (JsonQRVideo qrv in qrvCol.QRVideos)
+        {
+            QRVideo tmpQrVideo = new QRVideo(qrv.Id, qrv.Name, qrv.Description, qrv.Url, qrv.Count, qrv.UserGroupId, qrv.UserId, qrv.ReleaseDate);
+            qrvList.Add(tmpQrVideo);
+        }
+        return qrvList;
+    }
+
+    static JsonQRVideo QRVideoToJsonQRVideo(QRVideo vid)
+    {
+        JsonQRVideo jsonQrVideo = new JsonQRVideo(vid.Id, vid.Name, vid.Description, vid.Url, vid.Count, vid.UserGroupId, vid.UserId, vid.ReleaseDate);
+        return jsonQrVideo;
+    }
+
+    static JsonQRVideoUserView QRVideoUserViewToJsonQRVideoUserView(QRVideoUserView view)
+    {
+        JsonQRVideoUserView jsonQRVideoUserView = new JsonQRVideoUserView(view.VideoId, view.UserId, view.ViewDate);
+        return jsonQRVideoUserView;
+    }
+
     // Use this for initialization
-	void Start () {
+    void Start () {
 
 	}
 	

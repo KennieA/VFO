@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class DataLoader : MonoBehaviour {
@@ -22,6 +23,7 @@ public class DataLoader : MonoBehaviour {
             if (!checkNewVersion)
             {
                 StartCoroutine(DataManager.RetrieveData());
+                StartCoroutine(DataManager.RetrieveQRVideoData());
                 checkNewVersion = true;
             }
         }

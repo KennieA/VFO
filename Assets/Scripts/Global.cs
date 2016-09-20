@@ -145,8 +145,15 @@ public class Global : MonoBehaviour {
                 exercise.Score = score;
                 exercise.Attempted = true;
                 category.Update();
+
+
+                foreach (var qrVideo in Global.Instance.qrVideos)
+                {
+                    Debug.Log("video data " + qrVideo);
+                }
                 //StartCoroutine(DataManager.UploadData());
-                StartCoroutine(DataManager.UploadQRVideo());
+                //StartCoroutine(DataManager.UploadQRVideo());
+                //StartCoroutine(DataManager.UpdateQRVideo());
             }
         }
         else
