@@ -288,8 +288,11 @@ public class LinkMenu1 : BaseWindow
         public void Shift(float dist)
         {
             _rect.y += dist;
-            _scoreBox.Shift(dist);
-            _collButton.Position.y += dist;
+            if (_scoreBox != null)
+            {
+                _scoreBox.Shift(dist);
+                _collButton.Position.y += dist;
+            }
 
             foreach (LinkButton link in subLinks)
             {
@@ -348,7 +351,11 @@ public class LinkMenu1 : BaseWindow
             _content.text = Text;
             if (Texture) _content.image = Texture;
 
-            _scoreBox.Draw();
+            if(_scoreBox != null)
+            {
+                _scoreBox.Draw();
+            }
+
             if (_winParent.Button(_rect, _content, _style))
             {
                 if (isSubLink && Function != 0)
@@ -447,6 +454,7 @@ public class LinkMenu1 : BaseWindow
     private GUIStyle _btnStyle = new GUIStyle();
     private Vector2 _scrollVector = Vector2.zero;
     private LinkButton[] buttons = new LinkButton[0];
+    private LinkButton[] qrvMenu = new LinkButton[0];
 
     private float screenHeight = Screen.height;
     private float screenWidth = Screen.width;
@@ -530,8 +538,24 @@ public class LinkMenu1 : BaseWindow
                     //    _scrollVector = Vector3.zero;
                 }
             }
-
+        if (qrvMenu != null)
+            for (int i = 0; i < qrvMenu.Length; i++)
+            {
+                if (expanded)
+                {
+                    qrvMenu[i].Shift(dist);
+                }
+                else if (qrvMenu[i].Draw())
+                {
+                    expanded = true;
+                    dist = qrvMenu[i].Expanded ? qrvMenu[i].ExpandedHeight : -qrvMenu[i].ExpandedHeight;
+                    _realRect.height += dist;
+                    //if (_realRect.height < _viewRect.height)
+                    //    _scrollVector = Vector3.zero;
+                }
+            }
         EndScrollView();
+
         // - SCROLLVIEW END ---------------------------------------
 
         float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
@@ -551,6 +575,40 @@ public class LinkMenu1 : BaseWindow
 
     #region NonUnity Methods
 
+    //Initializes video-controls (buttons) and adds them to qrvMenu before adding them to the UI. 
+    void InitializeQrvMenu()
+    {
+        List<LinkButton> qrvList = new List<LinkButton>();
+        LinkButton scanButton = new LinkButton
+        {
+            WinParent = this,
+            Text = "Scan QR-Code",
+            Style = _btnStyle,
+            Function = 1,
+            isSubLink = true
+        };
+        LinkButton searchButton = new LinkButton
+        {
+            WinParent = this,
+            Text = "search for video",
+            Style = _btnStyle,
+            Function = 1,
+            isSubLink = true
+        };
+        LinkButton recordButton = new LinkButton
+        {
+            WinParent = this,
+            Text = "upload/record video",
+            Style = _btnStyle,
+            Function = 1,
+            isSubLink = true
+        };
+        qrvList.Add(scanButton);
+        qrvList.Add(searchButton);
+        qrvList.Add(recordButton);
+        qrvMenu = qrvList.ToArray();
+    }
+
     void Initialize2()
     {
         Debug.Log("Initialize");
@@ -560,6 +618,8 @@ public class LinkMenu1 : BaseWindow
         buttonPerPage = (int)((19.0f / 540.0f) * rect.height);
         screenHeight = Screen.height;
         screenWidth = Screen.width;
+        //Initializes Qrv Menu
+        InitializeQrvMenu();
 
         //Test();
         List<LinkButton> tmpList = new List<LinkButton>();
@@ -681,7 +741,19 @@ public class LinkMenu1 : BaseWindow
                 buttons[i].InitializeScore();
             }
             //TODO: remove + 60, added to prevent a bug in a particular case
-            _realRect = new Rect(0.0f, 0.0f, rect.width, buttons[buttons.Length - 1].y + _btnHeight + 60);
+            //_realRect = new Rect(0.0f, 0.0f, rect.width, buttons[buttons.Length - 1].y + _btnHeight + 60);
+
+            float buttonsHeight = buttons[buttons.Length - 1].y;
+            for (int i = 0; i < qrvMenu.Length; i++)
+            {
+                qrvMenu[i].x = x0;
+                qrvMenu[i].y = i != 0 ? qrvMenu[i - 1].y + _btnHeight + verticalPadding : verticalPadding + buttonsHeight + 60;
+                qrvMenu[i].width = _btnWidth;
+                qrvMenu[i].height = _btnHeight;
+                qrvMenu[i].Style = _btnStyle;
+                qrvMenu[i].VPadding = verticalPadding;
+            }
+            _realRect = new Rect(0.0f, 0.0f, rect.width, qrvMenu[qrvMenu.Length - 1].y + _btnHeight + 100);
         }
     }
 
