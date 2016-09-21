@@ -310,6 +310,10 @@ public class SceneLoader : MonoBehaviour {
                 Global.Instance.InfoWindowText = "breafing_back_in_chair_b";
                 s_level = "sim_back_in_chair_borger_b_new";
                 break;
+            case 1001:
+                Global.Instance.InfoWindowText = "Scan QR Code";
+                s_level = "scanQr";
+                break;
             default:
                 s_level = "main";
                 break;

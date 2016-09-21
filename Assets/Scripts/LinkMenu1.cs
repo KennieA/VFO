@@ -584,7 +584,7 @@ public class LinkMenu1 : BaseWindow
             WinParent = this,
             Text = "Scan QR-Code",
             Style = _btnStyle,
-            Function = 1,
+            Function = 1001,
             isSubLink = true
         };
         LinkButton searchButton = new LinkButton
@@ -592,7 +592,7 @@ public class LinkMenu1 : BaseWindow
             WinParent = this,
             Text = "search for video",
             Style = _btnStyle,
-            Function = 1,
+            Function = 1001,
             isSubLink = true
         };
         LinkButton recordButton = new LinkButton
@@ -600,7 +600,7 @@ public class LinkMenu1 : BaseWindow
             WinParent = this,
             Text = "upload/record video",
             Style = _btnStyle,
-            Function = 1,
+            Function = 1001,
             isSubLink = true
         };
         qrvList.Add(scanButton);
