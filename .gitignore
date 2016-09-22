@@ -1,4 +1,4 @@
-[Ll]ibrary/
+/[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
 /Assets/AssetStoreTools*
@@ -26,3 +26,5 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Library/
