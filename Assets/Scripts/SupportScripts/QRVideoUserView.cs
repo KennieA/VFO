@@ -1,12 +1,12 @@
 ﻿using System;
 
-public class QRVideoUserView
+public class QrVideoUserView
 {
     public int VideoId;
     public int UserId;
     public DateTime ViewDate;
 
-    public QRVideoUserView(int videoId, int userId, DateTime viewDate)
+    public QrVideoUserView(int videoId, int userId, DateTime viewDate)
     {
         VideoId = videoId;
         UserId = userId;

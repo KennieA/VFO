@@ -9,7 +9,7 @@ public class Global : MonoBehaviour {
 
     public ToolButton[] toolButtonArray = new ToolButton[0];
     public ExerciseCategoryCollection categoryCollection = new ExerciseCategoryCollection();
-    public List<QRVideo> qrVideos = new List<QRVideo>();
+    public List<QrVideo> qrVideos = new List<QrVideo>();
 
     private static Global _instance; //singleton
     private Dictionary<string,GameObject> guiObjects; //list of the

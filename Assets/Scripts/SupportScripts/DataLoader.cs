@@ -23,7 +23,7 @@ public class DataLoader : MonoBehaviour {
             if (!checkNewVersion)
             {
                 StartCoroutine(DataManager.RetrieveData());
-                StartCoroutine(DataManager.RetrieveQRVideoData());
+                StartCoroutine(DataManager.RetrieveQrVideoData());
                 checkNewVersion = true;
             }
         }

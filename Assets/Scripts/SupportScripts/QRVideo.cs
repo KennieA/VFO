@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class QRVideo
+public class QrVideo
 {
     public int Id;
     public string Name;
@@ -10,9 +10,10 @@ public class QRVideo
     public int UserGroupId;
     public int UserId;
     public DateTime ReleaseDate;
+    public string Password;
 
 
-    public QRVideo(int id, string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
+    public QrVideo(int id, string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate, string password)
     {
         Id = id;
         Name = name;
@@ -22,9 +23,10 @@ public class QRVideo
         UserGroupId = userGroupId;
         UserId = userId;
         ReleaseDate = releaseDate;
+        Password = password;
     }
 
-    public QRVideo(string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
+    public QrVideo(string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate, string password)
     {
         Name = name;
         Description = description;
@@ -33,5 +35,6 @@ public class QRVideo
         UserGroupId = userGroupId;
         UserId = userId;
         ReleaseDate = releaseDate;
+        Password = password;
     }
 }

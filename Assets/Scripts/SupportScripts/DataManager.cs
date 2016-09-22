@@ -88,13 +88,13 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public class JsonQRVideoCollection
+    public class JsonQrVideoCollection
     {
-        public JsonQRVideo[] QRVideos;
+        public JsonQrVideo[] QrVideos;
         public override string ToString()
         {
             string result = "";
-            foreach (JsonQRVideo qrv in QRVideos)
+            foreach (JsonQrVideo qrv in QrVideos)
             {
                 result += qrv.ToString() + " ";
             }
@@ -103,18 +103,18 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public class JsonQRVideoUserView
+    public class JsonQrVideoUserView
     {
         public int VideoId;
         public int UserId;
         public DateTime ViewDate;
 
-        public JsonQRVideoUserView()
+        public JsonQrVideoUserView()
         {
             
         }
 
-        public JsonQRVideoUserView(int videoId, int userId, DateTime viewDate)
+        public JsonQrVideoUserView(int videoId, int userId, DateTime viewDate)
         {
             VideoId = videoId;
             UserId = userId;
@@ -130,7 +130,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public class JsonQRVideo
+    public class JsonQrVideo
     {
         public int Id;
         public string Name;
@@ -140,12 +140,13 @@ public class DataManager : MonoBehaviour
         public int UserGroupId;
         public int UserId;
         public DateTime ReleaseDate;
+        public string Password;
 
-        public JsonQRVideo()
+        public JsonQrVideo()
         {
         }
 
-        public JsonQRVideo(int id, string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
+        public JsonQrVideo(int id, string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate, string password)
         {
             Id = id;
             Name = name;
@@ -155,9 +156,10 @@ public class DataManager : MonoBehaviour
             UserGroupId = userGroupId;
             UserId = userId;
             ReleaseDate = releaseDate;
+            Password = password;
         }
 
-        public JsonQRVideo(string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate)
+        public JsonQrVideo(string name, string description, string url, int count, int userGroupId, int userId, DateTime releaseDate, string password)
         {
             Name = name;
             Description = description;
@@ -166,6 +168,7 @@ public class DataManager : MonoBehaviour
             UserGroupId = userGroupId;
             UserId = userId;
             ReleaseDate = releaseDate;
+            Password = password;
         }
 
         public override string ToString()
@@ -390,16 +393,16 @@ public class DataManager : MonoBehaviour
         } 
     }
 
-    public static IEnumerator RetrieveQRVideoData()
+    public static IEnumerator RetrieveQrVideoData()
     {
-        Debug.Log("Retrieving QRVideoData");
+        Debug.Log("Retrieving QrVideoData");
 
-        string url = "https://vfo.welfaredenmark.com/Service/GetQRVideos/" + Global.Instance.UserId + "/" + "da-DK"; //Production environment service
-        url = "http://localhost:59477/Service/GetQRVideos/" + Global.Instance.UserId; //LOCAL SERVICE - Comment for release version
+        string url = "https://vfo.welfaredenmark.com/Service/GetQrVideos/" + Global.Instance.UserId + "/" + "da-DK"; //Production environment service
+        url = "http://localhost:59477/Service/GetQrVideos/" + Global.Instance.UserId; //LOCAL SERVICE - Comment for release version
 
         if (Global.Instance.ProgramLanguage == "sv-SE")
         {
-            //url = "http://vfo.welfaresverige.se/Service/GetQRVideos/" + Global.Instance.UserId + "/" + "sv-SE"; //OutComment if release version
+            //url = "http://vfo.welfaresverige.se/Service/GetQrVideos/" + Global.Instance.UserId + "/" + "sv-SE"; //OutComment if release version
         }
 
         WWW www = new WWW(url);
@@ -411,8 +414,8 @@ public class DataManager : MonoBehaviour
             Debug.Log("Result:\n" + www.text);
             try
             {
-                JsonQRVideoCollection qrvC = JsonReader.Deserialize<JsonQRVideoCollection>(www.text);
-                Global.Instance.qrVideos = JsonQRVideoToQRVideo(qrvC);
+                JsonQrVideoCollection qrvC = JsonReader.Deserialize<JsonQrVideoCollection>(www.text);
+                Global.Instance.qrVideos = JsonQrVideoToQrVideo(qrvC);
             }
             catch (Exception e)
             {
@@ -425,7 +428,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator UploadQRVideo()
+    public static IEnumerator UploadQrVideo()
     {
         Debug.Log("UploadQrVideo");
         string url = "https://vfo.welfaredenmark.com/Service/SaveData/"; //Production environment service
@@ -439,8 +442,8 @@ public class DataManager : MonoBehaviour
         }
 
 
-        QRVideo vid = new QRVideo("name", "desc", "url", 4, 103, 23, DateTime.Now);
-        JsonQRVideo qrVideos = QRVideoToJsonQRVideo(vid);
+        QrVideo vid = new QrVideo("name", "desc", "url", 4, 103, 23, DateTime.Now, null);
+        JsonQrVideo qrVideos = QrVideoToJsonQrVideo(vid);
 
         Debug.Log("Converted To Json Container:\n" + qrVideos.ToString());
         string serialized = JsonWriter.Serialize(qrVideos);
@@ -464,7 +467,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator UpdateQRVideo(QRVideo qrVideo)
+    public static IEnumerator UpdateQrVideo(QrVideo qrVideo)
     {
         Debug.Log("UpdateQRVideo");
         string url = "https://vfo.welfaredenmark.com/Service/UpdateData/"; //Production environment service
@@ -475,7 +478,7 @@ public class DataManager : MonoBehaviour
             //url = "http://vfo.welfaresverige.se/Service/UpdateVideo/"; //OutComment if release version
         }
 
-        JsonQRVideo jsonVid = QRVideoToJsonQRVideo(qrVideo);
+        JsonQrVideo jsonVid = QrVideoToJsonQrVideo(qrVideo);
 
         Debug.Log("Converted To Json Container:\n" + jsonVid.ToString());
         string serialized = JsonWriter.Serialize(jsonVid);
@@ -502,7 +505,7 @@ public class DataManager : MonoBehaviour
         }
     }
 
-    public static IEnumerator UploadQRVideoUserView()
+    public static IEnumerator UploadQrVideoUserView()
     {
         Debug.Log("UploadQrVideo");
         string url = "https://vfo.welfaredenmark.com/Service/SaveVideoUserViewData/"; //Production environment service
@@ -513,8 +516,8 @@ public class DataManager : MonoBehaviour
             //url = "http://vfo.welfaresverige.se/Service/SaveVideoUserViewData/"; //OutComment if release version
         }
 
-        QRVideoUserView view = new QRVideoUserView(1, 1, DateTime.Now);
-        JsonQRVideoUserView qrVideoUserView = QRVideoUserViewToJsonQRVideoUserView(view);
+        QrVideoUserView view = new QrVideoUserView(1, 1, DateTime.Now);
+        JsonQrVideoUserView qrVideoUserView = QrVideoUserViewToJsonQrVideoUserView(view);
 
         Debug.Log("Converted To Json Container:\n" + qrVideoUserView.ToString());
         string serialized = JsonWriter.Serialize(qrVideoUserView);
@@ -605,27 +608,27 @@ public class DataManager : MonoBehaviour
         return jcc;
     }
 
-    static List<QRVideo> JsonQRVideoToQRVideo(JsonQRVideoCollection qrvCol)
+    static List<QrVideo> JsonQrVideoToQrVideo(JsonQrVideoCollection qrvCol)
     {
-        List<QRVideo> qrvList = new List<QRVideo>();
-        foreach (JsonQRVideo qrv in qrvCol.QRVideos)
+        List<QrVideo> qrvList = new List<QrVideo>();
+        foreach (JsonQrVideo qrv in qrvCol.QrVideos)
         {
-            QRVideo tmpQrVideo = new QRVideo(qrv.Id, qrv.Name, qrv.Description, qrv.Url, qrv.Count, qrv.UserGroupId, qrv.UserId, qrv.ReleaseDate);
+            QrVideo tmpQrVideo = new QrVideo(qrv.Id, qrv.Name, qrv.Description, qrv.Url, qrv.Count, qrv.UserGroupId, qrv.UserId, qrv.ReleaseDate, qrv.Password);
             qrvList.Add(tmpQrVideo);
         }
         return qrvList;
     }
 
-    static JsonQRVideo QRVideoToJsonQRVideo(QRVideo vid)
+    static JsonQrVideo QrVideoToJsonQrVideo(QrVideo vid)
     {
-        JsonQRVideo jsonQrVideo = new JsonQRVideo(vid.Id, vid.Name, vid.Description, vid.Url, vid.Count, vid.UserGroupId, vid.UserId, vid.ReleaseDate);
+        JsonQrVideo jsonQrVideo = new JsonQrVideo(vid.Id, vid.Name, vid.Description, vid.Url, vid.Count, vid.UserGroupId, vid.UserId, vid.ReleaseDate, vid.Password);
         return jsonQrVideo;
     }
 
-    static JsonQRVideoUserView QRVideoUserViewToJsonQRVideoUserView(QRVideoUserView view)
+    static JsonQrVideoUserView QrVideoUserViewToJsonQrVideoUserView(QrVideoUserView view)
     {
-        JsonQRVideoUserView jsonQRVideoUserView = new JsonQRVideoUserView(view.VideoId, view.UserId, view.ViewDate);
-        return jsonQRVideoUserView;
+        JsonQrVideoUserView jsonQrVideoUserView = new JsonQrVideoUserView(view.VideoId, view.UserId, view.ViewDate);
+        return jsonQrVideoUserView;
     }
 
     // Use this for initialization
