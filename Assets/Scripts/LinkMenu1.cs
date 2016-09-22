@@ -581,28 +581,34 @@ public class LinkMenu1 : BaseWindow
         List<LinkButton> qrvList = new List<LinkButton>();
         LinkButton scanButton = new LinkButton
         {
+            Id = 12345,
             WinParent = this,
             Text = "Scan QR-Code",
             Style = _btnStyle,
             Function = 1001,
             isSubLink = true
         };
+        scanButton.Parent = scanButton;
         LinkButton searchButton = new LinkButton
         {
+            Id = 12345,
             WinParent = this,
             Text = "search for video",
             Style = _btnStyle,
             Function = 1001,
             isSubLink = true
         };
+        searchButton.Parent = searchButton;
         LinkButton recordButton = new LinkButton
         {
+            Id = 12345,
             WinParent = this,
             Text = "upload/record video",
             Style = _btnStyle,
             Function = 1001,
             isSubLink = true
         };
+        recordButton.Parent = recordButton;
         qrvList.Add(scanButton);
         qrvList.Add(searchButton);
         qrvList.Add(recordButton);

@@ -47,6 +47,7 @@ public class Global : MonoBehaviour {
 	private bool hasSimulationRun			= false;
 	private bool hasHelpOrTestRun			= false;
 	private bool runSimulationWithHelp 		= false;
+    private bool isQrVideoMenu              = false;
 	
 	private string infoWindowText			= "";
 
@@ -93,6 +94,12 @@ public class Global : MonoBehaviour {
 		get { return hasHelpOrTestRun; }
 		set { hasHelpOrTestRun = value; }
 	}
+
+    public bool IsQrVideoMenu
+    {
+        get { return isQrVideoMenu; }
+        set { isQrVideoMenu = value; }
+    }
 	
 	public string InfoWindowText
 	{

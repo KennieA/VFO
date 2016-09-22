@@ -85,6 +85,7 @@ public class SceneLoader : MonoBehaviour {
 		Global.Instance.HasSimulationRun = false;
 		Global.Instance.HasHelpOrTestRun = false;
 		Global.Instance.HasPreasurePointsRun = false;
+        Global.Instance.IsQrVideoMenu = false;
 		
         Debug.Log("loading scene" + _currentScene);
 
@@ -311,6 +312,7 @@ public class SceneLoader : MonoBehaviour {
                 s_level = "sim_back_in_chair_borger_b_new";
                 break;
             case 1001:
+		        Global.Instance.IsQrVideoMenu = true;
                 Global.Instance.InfoWindowText = "Scan QR Code";
                 s_level = "scanQr";
                 break;
@@ -320,8 +322,12 @@ public class SceneLoader : MonoBehaviour {
 		}
 
         p_level = "sim_preasure_points_help";
-		
-		if(!Global.Instance.HasHelpOrTestRun)
+
+	    if (Global.Instance.IsQrVideoMenu)
+	    {
+	        _loadThisScene = s_level;
+	    }
+		else if(!Global.Instance.HasHelpOrTestRun)
 		{
 			_loadThisScene = "help_or_test";
 		}
