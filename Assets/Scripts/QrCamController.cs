@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 using ZXing;
@@ -10,6 +11,7 @@ public class QrCamController : MonoBehaviour
     private Thread _qrThread;
     private Color32[] _c;
     private int _w, _h;
+    private List<QrVideo> videoList;
 
     public RawImage RawImage;
     public UnityEngine.UI.Text StatusText;
@@ -19,6 +21,7 @@ public class QrCamController : MonoBehaviour
 
     void Start()
     {
+        videoList = Global.Instance.qrVideos;
         _camTexture = new WebCamTexture();
 
         OnEnable();
@@ -119,8 +122,7 @@ public class QrCamController : MonoBehaviour
                 if (result != null)
                 {
                     _qrFound = true;
-                    Debug.Log(result);
-                    //LoadVideo();
+                    LoadVideo(result.ToString());
 
                 }
                 Thread.Sleep(200);
@@ -132,7 +134,14 @@ public class QrCamController : MonoBehaviour
         }
     }
 
-    void LoadVideo()
+    void LoadVideo(string result)
     {
+        foreach (var vid in videoList)
+        {
+            if (vid.Url.Equals(result))
+            {
+                Debug.Log(result);
+            }
+        }
     }
 }
