@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ZXing;
 
@@ -18,6 +20,7 @@ public class QrCamController : MonoBehaviour
 
     private bool _isQuit;
     private bool _qrFound;
+    private ZXing.Result result;
 
     void Start()
     {
@@ -31,7 +34,7 @@ public class QrCamController : MonoBehaviour
 
         StatusText.text = "Searching For QR";
 
-        _qrThread = new Thread(DecodeQR);
+        _qrThread = new Thread(DecodeQr);
         _qrThread.Start();
     }
 
@@ -44,6 +47,9 @@ public class QrCamController : MonoBehaviour
         if (_qrFound)
         {
             StatusText.text = "QR Video Found";
+            _qrThread.Abort();
+            LoadVideo(result.ToString());
+            
         }
 
         AdjustCamera();
@@ -98,8 +104,8 @@ public class QrCamController : MonoBehaviour
 
     void OnDestroy()
     {
-        _qrThread.Abort();
-        _camTexture.Stop();
+        //_qrThread.Abort();
+        //_camTexture.Stop();
     }
 
     void OnApplicationQuit()
@@ -107,7 +113,7 @@ public class QrCamController : MonoBehaviour
         _isQuit = true;
     }
 
-    void DecodeQR()
+    void DecodeQr()
     {
         var barcodeReader = new BarcodeReader { AutoRotate = false, TryHarder = false };
 
@@ -118,11 +124,10 @@ public class QrCamController : MonoBehaviour
 
             try
             {
-                var result = barcodeReader.Decode(_c, _w, _h);
+                result = barcodeReader.Decode(_c, _w, _h);
                 if (result != null)
                 {
                     _qrFound = true;
-                    LoadVideo(result.ToString());
 
                 }
                 Thread.Sleep(200);
@@ -140,7 +145,12 @@ public class QrCamController : MonoBehaviour
         {
             if (vid.Url.Equals(result))
             {
+                //_qrThread.Abort();
+                //_camTexture.Stop();
                 Debug.Log(result);
+                SceneLoader.Instance.CurrentScene = 1002;
+                //SceneManager.LoadScene("video_player");
+                _qrFound = false;
             }
         }
     }

@@ -316,9 +316,15 @@ public class SceneLoader : MonoBehaviour {
                 Global.Instance.InfoWindowText = "Scan QR Code";
                 s_level = "scanQr";
                 break;
+            case 1002:
+                Global.Instance.IsQrVideoMenu = true;
+                Global.Instance.InfoWindowText = "Play QR videos";
+                s_level = "video_player";
+                break;
             default:
                 s_level = "main";
                 break;
+
 		}
 
         p_level = "sim_preasure_points_help";
