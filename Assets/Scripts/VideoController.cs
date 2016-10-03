@@ -10,10 +10,14 @@ public class VideoController : MonoBehaviour
     RawImage _player;
     AudioSource _sound;
     MovieTexture video;
+    Message loadingBox;
+    bool loadingVideo;
 
     // Use this for initialization
     void Start ()
     {
+
+        loadingBox = Util.MessageBox(new Rect(0, 0, 300, 200), Text.Instance.GetString("data_loader_getting_data"), Message.Type.Info, false, true);
         _player = GetComponent<RawImage>();
         _sound = GetComponent<AudioSource>();
 
@@ -35,13 +39,16 @@ public class VideoController : MonoBehaviour
             video = www.movie;
             _player.texture = video;
             _sound.clip = video.audioClip;
+            loadingBox.Destroy();
             video.Play();
             _sound.Play();
         }
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
+        
         if (Input.GetKeyDown(KeyCode.Space) && video.isPlaying)
         {
             video.Pause();

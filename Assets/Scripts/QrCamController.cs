@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using ZXing;
 
 public class QrCamController : MonoBehaviour
 {
-
     private WebCamTexture _camTexture;
     private Thread _qrThread;
     private Color32[] _c;
     private int _w, _h;
     private List<QrVideo> videoList;
+    BarcodeReader barcodeReader;
 
     public RawImage RawImage;
     public UnityEngine.UI.Text StatusText;
@@ -24,8 +22,7 @@ public class QrCamController : MonoBehaviour
 
     void Start()
     {
-        videoList = Global.Instance.qrVideos;
-        _camTexture = new WebCamTexture();
+        Initialize();
 
         OnEnable();
         RawImage.texture = _camTexture;
@@ -38,6 +35,13 @@ public class QrCamController : MonoBehaviour
         _qrThread.Start();
     }
 
+    void Initialize()
+    {
+        barcodeReader = new BarcodeReader { AutoRotate = false, TryHarder = false };
+        videoList = Global.Instance.qrVideos;
+        _camTexture = new WebCamTexture();
+    }
+
     void Update()
     {
         if (_c == null)
@@ -47,11 +51,8 @@ public class QrCamController : MonoBehaviour
         if (_qrFound)
         {
             StatusText.text = "QR Video Found";
-            _qrThread.Abort();
             LoadVideo(result.ToString());
-            
         }
-
         AdjustCamera();
     }
 
@@ -104,8 +105,8 @@ public class QrCamController : MonoBehaviour
 
     void OnDestroy()
     {
-        //_qrThread.Abort();
-        //_camTexture.Stop();
+        _qrThread.Abort();
+        _camTexture.Stop();
     }
 
     void OnApplicationQuit()
@@ -115,8 +116,6 @@ public class QrCamController : MonoBehaviour
 
     void DecodeQr()
     {
-        var barcodeReader = new BarcodeReader { AutoRotate = false, TryHarder = false };
-
         while (!_qrFound)
         {
             if (_isQuit)
@@ -128,8 +127,8 @@ public class QrCamController : MonoBehaviour
                 if (result != null)
                 {
                     _qrFound = true;
-
                 }
+
                 Thread.Sleep(200);
                 _c = null;
             }
@@ -145,12 +144,8 @@ public class QrCamController : MonoBehaviour
         {
             if (vid.Url.Equals(result))
             {
-                //_qrThread.Abort();
-                //_camTexture.Stop();
-                Debug.Log(result);
-                SceneLoader.Instance.CurrentScene = 1002;
-                //SceneManager.LoadScene("video_player");
                 _qrFound = false;
+                SceneLoader.Instance.CurrentScene = 1002;                
             }
         }
     }
