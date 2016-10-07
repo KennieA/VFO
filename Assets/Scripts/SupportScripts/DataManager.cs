@@ -105,12 +105,12 @@ public class DataManager : MonoBehaviour
 
     public class JsonVideoCategoryCollection
     {
-        public JsonVideoCategory[] videoCategories;
+        public JsonVideoCategory[] VideoCategories;
 
         public override string ToString()
         {
             string result = "";
-            foreach (JsonVideoCategory qrv in videoCategories)
+            foreach (JsonVideoCategory qrv in VideoCategories)
             {
                 result += qrv.ToString() + " ";
             }
@@ -453,9 +453,9 @@ public class DataManager : MonoBehaviour
             Debug.Log("Result:\n" + www.text);
             try
             {
-                //JsonVideoCategoryCollection qrvC = JsonReader.Deserialize<JsonVideoCategoryCollection>(www.text);
+                JsonVideoCategoryCollection qrvC = JsonReader.Deserialize<JsonVideoCategoryCollection>(www.text);
                 Debug.Log("After Deserialize");
-                //Global.Instance.videoCategories = JsonVideoCategoryToVideoCategory(qrvC);
+                Global.Instance.videoCategories = JsonVideoCategoryToVideoCategory(qrvC);
             }
             catch (Exception e)
             {
@@ -697,7 +697,7 @@ public class DataManager : MonoBehaviour
     static List<VideoCategory> JsonVideoCategoryToVideoCategory(JsonVideoCategoryCollection jsonVidCol)
     {
         List<VideoCategory> vcList = new List<VideoCategory>();
-        foreach (JsonVideoCategory qrv in jsonVidCol.videoCategories)
+        foreach (JsonVideoCategory qrv in jsonVidCol.VideoCategories)
         {
             VideoCategory videoCategory = new VideoCategory(qrv.Id, qrv.Name);
             vcList.Add(videoCategory);

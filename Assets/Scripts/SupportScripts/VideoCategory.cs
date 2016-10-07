@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class VideoCategory {
-    int Id;
-    string Name;
+    public int Id;
+    public string Name;
 
     public VideoCategory(int id, string name)
     {

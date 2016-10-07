@@ -197,33 +197,16 @@ public class SearchMenu : BaseWindow {
         };
 
         List<ToggleButton> tmpList = new List<ToggleButton>();
-        ToggleButton tb1 = new ToggleButton
+        foreach (VideoCategory vc in Global.Instance.videoCategories)
         {
-            Id = 1,
-            Category = "Vejledning"
-        };
-        ToggleButton tb2 = new ToggleButton
-        {
-            Id = 2,
-            Category = "Forflytning"
-        };
-        ToggleButton tb3 = new ToggleButton
-        {
-            Id = 3,
-            Category = "Individuel Forflytning"
-        };
-        tmpList.Add(tb1);
-        tmpList.Add(tb2);
-        tmpList.Add(tb3);
-        //foreach (VideoCategory vc in Global.Instance.videoCategories)
-        //{
-        //    var tmpToggle = new ToggleButton
-        //    {
-        //        Id = vc.Id,
-        //        Category = vc.Name
-        //    };
-        //    tmpList.Add(tmpToggle);
-        //}
+            Debug.Log("LOOK AT ME!" + vc.Name);
+            var tmpToggle = new ToggleButton
+            {
+                Id = vc.Id,
+                Category = vc.Name
+            };
+            tmpList.Add(tmpToggle);
+        }
         toggles = tmpList.ToArray();
 
         Color tmpColor = new Color(0f, 0f, 0f, 0f);
@@ -241,6 +224,7 @@ public class SearchMenu : BaseWindow {
         _searchFieldStyle.normal.textColor = Color.white;
         _searchFieldStyle.fontSize = 16;
         _searchFieldStyle.font = font;
+        _searchFieldStyle.alignment = TextAnchor.MiddleLeft;
 
         //Create ToggleButton Style
         _toggleBtnStyle.normal.background = toggleNormal;
