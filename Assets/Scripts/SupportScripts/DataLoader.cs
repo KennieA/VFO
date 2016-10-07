@@ -24,6 +24,7 @@ public class DataLoader : MonoBehaviour {
             {
                 StartCoroutine(DataManager.RetrieveData());
                 StartCoroutine(DataManager.RetrieveQrVideoData());
+                StartCoroutine(DataManager.RetrieveVideoCategoryData());
                 checkNewVersion = true;
             }
         }

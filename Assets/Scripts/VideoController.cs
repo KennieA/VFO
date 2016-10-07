@@ -11,7 +11,7 @@ public class VideoController : MonoBehaviour
     AudioSource _sound;
     MovieTexture video;
     Message loadingBox;
-    bool loadingVideo;
+    int progress;
 
     // Use this for initialization
     void Start ()
@@ -27,7 +27,13 @@ public class VideoController : MonoBehaviour
     IEnumerator LoadVideo()
     {
         WWW www = new WWW(url);
-        yield return www;
+
+
+        while (!www.isDone)
+        {
+            progress = int.Parse((www.progress * 100).ToString("F0"));
+            yield return null;
+        }
 
         if (www.error != null)
         {
@@ -48,7 +54,7 @@ public class VideoController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-        
+        loadingBox.Text = Text.Instance.GetString("sceneloader_downloading") + " " + progress + "%";
         if (Input.GetKeyDown(KeyCode.Space) && video.isPlaying)
         {
             video.Pause();
