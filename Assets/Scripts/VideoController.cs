@@ -4,23 +4,21 @@ using UnityEngine.UI;
 
 public class VideoController : MonoBehaviour
 {
+    //string url = "https://welfaredenmark.blob.core.windows.net/vfo-recordings-staging/ogv";
+    string url;
 
-    string url = "https://welfaredenmark.blob.core.windows.net/vfo-recordings-staging/ogv";
-
-    RawImage _player;
-    AudioSource _sound;
+    public RawImage _player;
+    public AudioSource _sound;
     MovieTexture video;
     Message loadingBox;
-    bool loadingVideo;
 
-    // Use this for initialization
+
     void Start ()
     {
-
         loadingBox = Util.MessageBox(new Rect(0, 0, 300, 200), Text.Instance.GetString("data_loader_getting_data"), Message.Type.Info, false, true);
-        _player = GetComponent<RawImage>();
-        _sound = GetComponent<AudioSource>();
-
+        //_player = GetComponent<RawImage>();
+        //_sound = GetComponent<AudioSource>();
+        url = Global.Instance.videoUrl;
         StartCoroutine(LoadVideo());
     }
 
@@ -28,7 +26,8 @@ public class VideoController : MonoBehaviour
     {
         WWW www = new WWW(url);
         yield return www;
-
+        url = "";
+        Debug.Log(url);
         if (www.error != null)
         {
             Debug.Log("Error: Can't load video");

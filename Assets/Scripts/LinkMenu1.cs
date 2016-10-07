@@ -360,13 +360,29 @@ public class LinkMenu1 : BaseWindow
             {
                 if (isSubLink && Function != 0)
                 {
-                    
-                    SceneLoader.Instance.CurrentCategory = Parent != null ? Parent.Id : -1;
-                    Debug.Log("Loading Scene: " + Function +
-                        "\nCategory: " + SceneLoader.Instance.CurrentCategory+
-                        "\nExercise: " + SceneLoader.Instance.CurrentScene);
-                    SceneLoader.Instance.CurrentScene = Function;
-                    SceneLoader.Instance.CurrentID = Id;
+                    //hardcoded Id for search button
+                    if (Id == 9999)
+                    {
+                        if (!GameObject.Find("SearchMenu(Clone)"))
+                        {
+                            Util.InstantiateResource<SearchMenu>("SearchMenu");
+                        }
+                        else
+                        {
+                            GameObject.Destroy(GameObject.Find("SearchMenu(Clone)"));
+                        }
+
+                        //_searchVideo = true;
+                    }
+                    else
+                    {
+                        SceneLoader.Instance.CurrentCategory = Parent != null ? Parent.Id : -1;
+                        Debug.Log("Loading Scene: " + Function +
+                            "\nCategory: " + SceneLoader.Instance.CurrentCategory +
+                            "\nExercise: " + SceneLoader.Instance.CurrentScene);
+                        SceneLoader.Instance.CurrentScene = Function;
+                        SceneLoader.Instance.CurrentID = Id;
+                    }
                 }
                 else
                 {
@@ -455,9 +471,11 @@ public class LinkMenu1 : BaseWindow
     private Vector2 _scrollVector = Vector2.zero;
     private LinkButton[] buttons = new LinkButton[0];
     private LinkButton[] qrvMenu = new LinkButton[0];
+    //private static bool _searchVideo = false; Remove if SearchMenu work as a class of it own
 
     private float screenHeight = Screen.height;
     private float screenWidth = Screen.width;
+    
 
     //---------------------------------------------------------------
 
@@ -467,6 +485,7 @@ public class LinkMenu1 : BaseWindow
     {
         Debug.Log("start");
         Initialize2();
+
     }
 
 
@@ -486,13 +505,19 @@ public class LinkMenu1 : BaseWindow
         {
             //Initialize2();
         }
-    
+
         Position = rect;
         Box(new Rect(0, 0, Position.width, Position.height), "", _panelStyle);
         Content();
-        
-    }
+        //if (_searchVideo)
+        //{
+        //    Position = searchMenu;
+        //    Box(new Rect(0, 0, Position.width, Position.height), "", _searchStyle);
+        //    AnimateSearchMenu();
+        //    SearchMenuContent();
+        //}
 
+    }
 
     void Content()
     {
@@ -589,16 +614,6 @@ public class LinkMenu1 : BaseWindow
             isSubLink = true
         };
         scanButton.Parent = scanButton;
-        LinkButton searchButton = new LinkButton
-        {
-            Id = 12345,
-            WinParent = this,
-            Text = "search for video",
-            Style = _btnStyle,
-            Function = 1001,
-            isSubLink = true
-        };
-        searchButton.Parent = searchButton;
         LinkButton recordButton = new LinkButton
         {
             Id = 12345,
@@ -608,6 +623,16 @@ public class LinkMenu1 : BaseWindow
             Function = 1001,
             isSubLink = true
         };
+        LinkButton searchButton = new LinkButton
+        {
+            Id = 9999,
+            WinParent = this,
+            Text = "search for video",
+            Style = _btnStyle,
+            Function = 1001,
+            isSubLink = true
+        };
+        searchButton.Parent = searchButton;
         recordButton.Parent = recordButton;
         qrvList.Add(scanButton);
         qrvList.Add(searchButton);
@@ -686,7 +711,7 @@ public class LinkMenu1 : BaseWindow
 
         //Create Panel Style
         _panelStyle.normal.background = panelBackground ? panelBackground : hoverTexture;
-        _panelStyle.border.left = _panelStyle.border.right = _panelStyle.border.bottom = _panelStyle.border.top = 10;
+        _panelStyle.border.left = _panelStyle.border.right = _panelStyle.border.bottom = _panelStyle.border.top = 10;        
 
         //Create button style
         _btnStyle.imagePosition = ImagePosition.ImageAbove;
