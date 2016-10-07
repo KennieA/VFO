@@ -103,6 +103,22 @@ public class DataManager : MonoBehaviour
         }
     }
 
+    public class JsonVideoCategoryCollection
+    {
+        public JsonVideoCategory[] videoCategories;
+
+        public override string ToString()
+        {
+            string result = "";
+            foreach (JsonVideoCategory qrv in videoCategories)
+            {
+                result += qrv.ToString() + " ";
+            }
+            result += ">";
+            return result;
+        }
+    }
+
     public class JsonQrVideoUserView
     {
         public int VideoId;
@@ -200,6 +216,29 @@ public class DataManager : MonoBehaviour
             {
                 result += e.ToString() + " ";
             }
+            result += "}";
+            return result;
+        }
+    }
+
+    public class JsonVideoCategory
+    {
+        public int Id;
+        public string Name;
+        public JsonVideoCategory()
+        {
+        }
+
+        public JsonVideoCategory(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public override string ToString()
+        {
+            string result = base.ToString() + " " + "{ ";
+          
             result += "}";
             return result;
         }
@@ -391,6 +430,42 @@ public class DataManager : MonoBehaviour
         {
             Debug.Log("Upload Error: " + www.error);
         } 
+    }
+
+    public static IEnumerator RetrieveVideoCategoryData()
+    {
+        Debug.Log("Retrieving QrVideoData");
+
+        string url = "https://vfo.welfaredenmark.com/Service/GetVideoCategories/" ; //Production environment service
+        url = "http://localhost:59477/Service/GetVideoCategories/";//LOCAL SERVICE - Comment for release version
+
+        if (Global.Instance.ProgramLanguage == "sv-SE")
+        {
+            //url = "http://vfo.welfaresverige.se/Service/GetVideoCategories/" + Global.Instance.UserId + "/" + "sv-SE"; //OutComment if release version
+        }
+
+        WWW www = new WWW(url);
+
+        yield return www;
+
+        if (www.error == null)
+        {
+            Debug.Log("Result:\n" + www.text);
+            try
+            {
+                //JsonVideoCategoryCollection qrvC = JsonReader.Deserialize<JsonVideoCategoryCollection>(www.text);
+                Debug.Log("After Deserialize");
+                //Global.Instance.videoCategories = JsonVideoCategoryToVideoCategory(qrvC);
+            }
+            catch (Exception e)
+            {
+                Util.MessageBox(new Rect(0, 0, 400, 200), "Error: " + e.Message + "\n\nPlease try to restart the application!", Message.Type.Error, false, true);
+            }
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
     }
 
     public static IEnumerator RetrieveQrVideoData()
@@ -617,6 +692,17 @@ public class DataManager : MonoBehaviour
             qrvList.Add(tmpQrVideo);
         }
         return qrvList;
+    }
+
+    static List<VideoCategory> JsonVideoCategoryToVideoCategory(JsonVideoCategoryCollection jsonVidCol)
+    {
+        List<VideoCategory> vcList = new List<VideoCategory>();
+        foreach (JsonVideoCategory qrv in jsonVidCol.videoCategories)
+        {
+            VideoCategory videoCategory = new VideoCategory(qrv.Id, qrv.Name);
+            vcList.Add(videoCategory);
+        }
+        return vcList;
     }
 
     static JsonQrVideo QrVideoToJsonQrVideo(QrVideo vid)
